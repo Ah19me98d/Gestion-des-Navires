@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.themleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+<meta charset="ISO-8859-1">
+<title>Gestion de navires</title>
+
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.1.3/css/bootstrap.min.css"/>
+</head>
+<body>
+	<table style="margin-left: 750px">
+						<th>
+							<span sec:authorize="isAuthenticated()">
+								<span sec:authentication="name"></span>
+								</span>
+								<span sec:authorize="!isAuthenticated()">
+								<span>Connect</span>
+							</span>
+						</th>
+						<th>
+							<a sec:authorize="isAuthenticated()" class="btn btn-danger" type="button" th:href="@{logout}">Deconnection</a>
+						</th>
+	</table>
+	<div class="container mt-5">
+		<div class="card">
+			<div class="card-header">Liste des navires</div>
+			<div class="card">
+				<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-success"  th:href="@{addNavire}">Ajouter un navire</a>
+			</div>
+			
+			<div class="card-body">
+				<table class="table">
+					<tr>
+						<th>Id</th>
+						<th>Nom</th>
+						<th>Date d'arrivee</th>
+						<th>Date de travail</th>
+						<th>Shift</th>
+						<th>Marchandise</th>
+					</tr>
+					<tr th:each="n:${navires}">
+						<th th:text="${n.id}"></th>
+						<th th:text="${n.nom}"></th>
+						<th th:text="${n.dateArrivee}"></th>
+						<th th:text="${n.dateTravail}"></th>
+						<th th:text="${n.shift}"></th>
+						<th th:text="${n.marchandise}"></th>
+						<td>
+							<a sec:authorize="hasRole('ROLE_ADMIN')" class="btn btn-danger" th:href=@{deleteNavire(id=${n.id})}>Delete</a>
+						</td>
+					</tr>
+				</table>
+				<div class="card">
+					<a class="btn btn-danger"  th:href="@{grues}">Afficher Grues</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.themleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Liste des grues</title>
+
+<link rel="stylesheet" type="text/css" href="/webjars/bootstrap/4.1.3/css/bootstrap.min.css"/>
+</head>
+<body>
+	<div class="container mt-5">
+		<div class="card">
+			<div class="card-header">Liste des grues</div>
+			
+			<div class="card-body">
+				<table class="table">
+					<tr>
+						<th>Id</th>
+						<th>Nom</th>
+						<th>isWorking</th>
+					</tr>
+					<tr th:each="n:${grues}">
+						<th th:text="${n.id}"></th>
+						<th th:text="${n.name}"></th>
+						<th th:text="${n.travail}"></th>
+					</tr>
+				</table>
+				<div class="card">
+					<a class="btn btn-danger"  th:href="@{main}">BACK</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
